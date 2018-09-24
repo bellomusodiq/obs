@@ -1,0 +1,10 @@
+.add-new{
+    height: 0;
+    opacity: 0;
+    transition: .4s all ease!important;
+    overflow: hidden;
+}
+.showreg{
+    opacity: 1;
+    height: fit-content;
+}
