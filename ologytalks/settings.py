@@ -70,7 +70,7 @@ ROOT_URLCONF = 'ologytalks.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend_', 'build'),],
+        'DIRS': [os.path.join(BASE_DIR, 'build'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,7 +156,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend_', 'build', 'static'),
+    os.path.join(BASE_DIR, 'build', 'static'),
 ]
 
 CONTROL_ALLOW_ORIGIN = '*'
