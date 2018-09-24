@@ -83,8 +83,6 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 WSGI_APPLICATION = 'ologytalks.wsgi.application'
 
 
@@ -212,5 +210,3 @@ JWT_AUTH = {
     'JWT_AUTH_COOKIE': None,
 
 }
-import django_heroku
-django_heroku.settings(locals())
