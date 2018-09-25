@@ -154,8 +154,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build', 'static'),
 ]
 
-# CONTROL_ALLOW_ORIGIN = '*'
-# CORS_ORIGIN_ALLOW_ALL = True
+CONTROL_ALLOW_ORIGIN = '*'
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 REST_FRAMEWORK = {
