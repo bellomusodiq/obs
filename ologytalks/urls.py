@@ -29,13 +29,13 @@ router.register(r'comments', CommentViewSet, base_name='comments')
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 
     path('api/generate-cupon/', GenerateCupon.as_view() ),
     path('api/account/reset-password/', ForgotPassword.as_view() ),
     path('api/account/login/', UserLoginAPIView.as_view() ),
     path('api/account/read/', ReadPost.as_view() ),
+    path('admin/', admin.site.urls),
     path('api/account/comment/', CommentPost.as_view() ),
     path('api-token-auth/', obtain_jwt_token),
 ]
