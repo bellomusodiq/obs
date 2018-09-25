@@ -28,6 +28,9 @@ router.register(r'category', CategoryViewSet, base_name='category')
 router.register(r'comments', CommentViewSet, base_name='comments')
 from django.views.generic import TemplateView
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('api/', include(router.urls)),
 
@@ -40,10 +43,7 @@ urlpatterns = [
     path('api-token-auth/', obtain_jwt_token),
 ]
 
-from django.conf import settings
-from django.conf.urls.static import static
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 urlpatterns += re_path('.*', TemplateView.as_view(template_name='index.html')),
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
