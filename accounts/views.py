@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from .serializers import UserSerializer, CuponCodeSerializer
 from .models import User, CuponCode
 from rest_framework.response import Response
@@ -43,6 +43,16 @@ class UserViewSet(viewsets.ModelViewSet):
                         return Response({'data':'Incorrect password'}, status=status.HTTP_400_BAD_REQUEST)
                 except:
                     pass
+
+class UserCreate(APIView):
+    def get(self, request):
+        return Response({'working': 'okay'})
+    def post(self, request):
+        serializer = UserSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ActivateView(APIView):
     def get(self, request):

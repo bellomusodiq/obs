@@ -8,15 +8,19 @@ from accounts.views import (
     UserLoginAPIView, 
     ForgotPassword,
     GenerateCupon,
-    CuponCodeViewSet
+    CuponCodeViewSet,
+    UserCreate
 )
 from posts.views import (
     PostViewSet,
     CategoryViewSet,
     CommentViewSet,
     ReadPost,
-    CommentPost
+    CommentPost,
+    LocationViewSet
 )
+
+from witdrawals.views import WitdrawalViewSet
 
 from rest_framework.routers import DefaultRouter
 
@@ -26,6 +30,8 @@ router.register(r'cupon-code', CuponCodeViewSet, base_name='cupon-code')
 router.register(r'posts', PostViewSet, base_name='posts')
 router.register(r'category', CategoryViewSet, base_name='category')
 router.register(r'comments', CommentViewSet, base_name='comments')
+router.register(r'locations', LocationViewSet, base_name='locations')
+router.register(r'witdraw', WitdrawalViewSet, base_name='witdraw')
 from django.views.generic import TemplateView
 from django.views.static import serve
 
@@ -39,6 +45,7 @@ urlpatterns = [
     path('api/account/reset-password/', ForgotPassword.as_view() ),
     path('api/account/login/', UserLoginAPIView.as_view() ),
     path('api/account/read/', ReadPost.as_view() ),
+    path('api/account/create/', UserCreate.as_view() ),
     path('admin/', admin.site.urls),
     path('api/account/comment/', CommentPost.as_view() ),
     path('api-token-auth/', obtain_jwt_token),

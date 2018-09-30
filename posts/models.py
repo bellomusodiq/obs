@@ -20,7 +20,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts/image')
     music = models.FileField(upload_to='posts/music', blank=True, null=True)
     music_title = models.CharField(max_length=150, blank=True, null=True)
-    location = models.CharField(max_length=150, blank=True, null=True)
+    location = models.ForeignKey('Location', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-created_at']
@@ -40,6 +40,19 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+
+class Location(models.Model):
+    location = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.location
+    
+
+class Trending(models.Model):
+    trending = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.trending
     
 
 from .utils import unique_slug_generator

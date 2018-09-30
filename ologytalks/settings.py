@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6(=+(mbi1hebr%bdb3h6!lc^!v663pe)r+w)377wn1wrv(6xs='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'accounts',
     'posts',
     'sitesettings',
+    'witdrawals'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -139,8 +140,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+from datetime import datetime
+mydate = datetime.now()
 
-DATETIME_INPUT_FORMATS = ('%Y-%m-%d %H:%M:%S',)
+DATETIME_INPUT_FORMATS = mydate.strftime('%m/%d/%Y %H:%M:%S')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

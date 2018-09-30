@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Post, Category, Comment
-from .serializers import PostSerializer, CategorySerializer, CommentSerializer
+from .models import Post, Category, Comment, Location
+from .serializers import PostSerializer, CategorySerializer, CommentSerializer, LocationSerializer
 from ologytalks.permissions import IsAdminOrReadOnly, IsOwnerOrAdminOrReadOnly, IsRegularUser
 # Create your views here.
 
@@ -53,6 +53,11 @@ class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
+class LocationViewSet(ModelViewSet):
+    serializer_class = LocationSerializer
+    queryset = Location.objects.all()
+
+
 class CommentViewSet(ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
@@ -67,12 +72,12 @@ class CommentPost(APIView):
             if not post in user.comment_on_posts.split(','):
                 new_post_add = user.comment_on_posts+','+post
                 user.comment_on_posts = new_post_add
-                user.comment_allowance = float(user.comment_allowance) + 2
+                user.comment_allowance = float(user.comment_allowance) + .5
                 user.save()
         else:
             new_post_add = post
             user.comment_on_posts = new_post_add
-            user.comment_allowance = float(user.comment_allowance) + 2
+            user.comment_allowance = float(user.comment_allowance) + .5
             user.save()
         return Response('Read')
 

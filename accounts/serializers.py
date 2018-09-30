@@ -4,7 +4,6 @@ from .models import User, CuponCode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 import string, random
-from django.core.exceptions import ValidationError
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,6 +28,13 @@ class UserSerializer(serializers.ModelSerializer):
             'referral_code': {'read_only': True},
             }
     
+    def validate_cupon_code(self, value):
+
+        if value in [code.code for code in CuponCode.objects.all()] or value == '':
+            return value
+        if(value in [user.referral_code for user in User.objects.filter(is_admin=False)]):
+            return value
+        raise serializers.ValidationError('Incorrect cupon code, input a correct cupon code or leave blank')
 
     def create(self, validated_data, *args, **kwargs):
         user = User(
@@ -79,13 +85,13 @@ class UserLoginSerializer(serializers.ModelSerializer):
         username = data.get('username', None)
         password = data['password']
         if not username:
-            raise ValidationError('A username is required to login')
+            raise serializers.ValidationError('A username is required to login')
         user = User.objects.get(username=username)
         if not user:
-            raise ValidationError('the username is not valid')
+            raise serializers.ValidationError('the username is not valid')
         if(user):
             if not user.check_password(password):
-                raise ValidationError('Incorrect Credential please try again')
+                raise serializers.ValidationError('Incorrect Credential please try again')
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
         jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
         payload = jwt_payload_handler(user)
