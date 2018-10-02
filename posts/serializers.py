@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Category, Comment, Location
+from .models import Post, Category, Comment, Location, Trending
 from accounts.serializers import UserSerializer
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -10,6 +10,11 @@ class CategorySerializer(serializers.ModelSerializer):
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
+        fields = '__all__'
+
+class TrendingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trending
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -32,13 +37,14 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Post
         fields = [
-            'id', 'slug', 'created_at', 'published_at', 'content', 'category', 'category_detail',
-             'title', 'image', 'author', 'author_detail',
+            'id', 'slug', 'published_at', 'content', 'category', 'category_detail',
+             'title', 'image', 'author', 'author_detail', 'sponsored',
              'music', 'music_title', 'location', 'location_title',
             'comments',
         ]
         extra_kwargs = {
             'url': {'view_name': 'posts', 'lookup_field': 'slug'},
+            'created_at': {'read_only': True}
         }
 
     def get_author_detail(self, obj):

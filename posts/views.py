@@ -2,14 +2,16 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Post, Category, Comment, Location
-from .serializers import PostSerializer, CategorySerializer, CommentSerializer, LocationSerializer
+from .models import Post, Category, Comment, Location, Trending
+from .serializers import PostSerializer, CategorySerializer, CommentSerializer, LocationSerializer, TrendingSerializer
 from ologytalks.permissions import IsAdminOrReadOnly, IsOwnerOrAdminOrReadOnly, IsRegularUser
+from .paginations import LargeResultsSetPagination, SmallResultsSetPagination
 # Create your views here.
 
 class PostViewSet(ModelViewSet):
     permission_classes = [IsAdminOrReadOnly, ]
     serializer_class = PostSerializer
+    pagination_class = LargeResultsSetPagination
     lookup_field = 'slug'
     def get_queryset(self):
         queryset = Post.objects.all()
@@ -24,10 +26,13 @@ class PostViewSet(ModelViewSet):
             queryset = queryset.filter(category__title=category)
         location = self.request.GET.get('location')
         if(location):
-            queryset = queryset.filter(location=location)
+            queryset = queryset.filter(location__title=location)
         q = self.request.GET.get('q')
         if q:
             queryset = queryset.filter(title__icontains=q)
+        sponsored = self.request.GET.get('sponsored')
+        if sponsored:
+            queryset = queryset.filter(sponsored=True)
         return queryset
 
 class ReadPost(APIView):
@@ -57,8 +62,13 @@ class LocationViewSet(ModelViewSet):
     serializer_class = LocationSerializer
     queryset = Location.objects.all()
 
+class TrendingViewSet(ModelViewSet):
+    serializer_class = TrendingSerializer
+    queryset = Trending.objects.all()
+
 
 class CommentViewSet(ModelViewSet):
+    pagination_class = SmallResultsSetPagination
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
 

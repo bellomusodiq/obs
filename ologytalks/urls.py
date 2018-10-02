@@ -17,10 +17,13 @@ from posts.views import (
     CommentViewSet,
     ReadPost,
     CommentPost,
-    LocationViewSet
+    LocationViewSet,
+    TrendingViewSet
 )
 
 from witdrawals.views import WitdrawalViewSet
+
+from sitesettings.views import SiteSettingsViewSet
 
 from rest_framework.routers import DefaultRouter
 
@@ -32,6 +35,8 @@ router.register(r'category', CategoryViewSet, base_name='category')
 router.register(r'comments', CommentViewSet, base_name='comments')
 router.register(r'locations', LocationViewSet, base_name='locations')
 router.register(r'witdraw', WitdrawalViewSet, base_name='witdraw')
+router.register(r'trending', TrendingViewSet, base_name='trending')
+router.register(r'site-settings', SiteSettingsViewSet, base_name='site-settings')
 from django.views.generic import TemplateView
 from django.views.static import serve
 

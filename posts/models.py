@@ -15,15 +15,15 @@ class Post(models.Model):
     title = models.CharField(max_length=400)
     slug = models.SlugField(blank=True, null=True)
     content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    published_at = models.DateTimeField(blank=True, null=True)
+    published_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='posts/image')
     music = models.FileField(upload_to='posts/music', blank=True, null=True)
     music_title = models.CharField(max_length=150, blank=True, null=True)
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
+    sponsored = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-published_at']
     def __str__(self):
         return self.title
     
