@@ -12,10 +12,12 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 import string
 import random
+from posts.paginations import SmallResultsSetPagination
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    pagination_class = SmallResultsSetPagination
 
     def partial_update(self, request, *args, **kwargs):
         change_password=request.GET.get('change_password')
