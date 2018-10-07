@@ -68,7 +68,6 @@ class TrendingViewSet(ModelViewSet):
 
 
 class CommentViewSet(ModelViewSet):
-    pagination_class = SmallResultsSetPagination
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
 

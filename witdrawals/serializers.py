@@ -10,7 +10,7 @@ class WitdrawalSerializer(serializers.ModelSerializer):
             'id', 'email', 'user', 'referral_allowance',
             'read_allowance', 'comment_allowance', 'date', 'bank_account_no',
             'bank_account_name', 'referral_allowance', 'read_allowance',
-            'comment_allowance', 'username',
+            'comment_allowance', 'username', 'bank_name',
         ]
         extra_kwargs = {
             "date": {"read_only": True},

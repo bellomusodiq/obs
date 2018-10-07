@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
         return gen
             
 
-    def create_user(self, username, email, firstname, lastname, cupon_code, referral_code, activation_token, password=None):
+    def create_user(self, username, email, firstname, lastname, cupon_code, referral_code, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -34,7 +34,6 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             firstname=firstname,
             lastname=lastname,
-            activation_token = self.gen_token(),
             cupon_code = cupon_code,
             referral_code = self.gen_token(10),
         )
@@ -54,6 +53,8 @@ class UserManager(BaseUserManager):
             password=password,
             firstname='',
             lastname='',
+            referral_code='',
+            cupon_code='',
         )
         user.is_active = True
         user.is_admin = True

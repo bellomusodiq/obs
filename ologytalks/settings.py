@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'accounts',
     'posts',
     'sitesettings',
-    'witdrawals'
+    'witdrawals',
+    'ads'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

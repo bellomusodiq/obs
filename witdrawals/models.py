@@ -7,6 +7,7 @@ class Witdraw(models.Model):
     email = models.EmailField()
     date = models.DateField(auto_now_add=True)
     bank_account_no = models.PositiveIntegerField()
+    bank_name = models.CharField(max_length=240)
     bank_account_name = models.CharField(max_length=240)
     referral_allowance = models.DecimalField(default=0, decimal_places=2, max_digits=200)
     read_allowance = models.DecimalField(default=0, decimal_places=2, max_digits=200)

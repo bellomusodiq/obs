@@ -25,6 +25,8 @@ from witdrawals.views import WitdrawalViewSet
 
 from sitesettings.views import SiteSettingsViewSet
 
+from ads.views import AdViewSet
+
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -36,6 +38,7 @@ router.register(r'comments', CommentViewSet, base_name='comments')
 router.register(r'locations', LocationViewSet, base_name='locations')
 router.register(r'witdraw', WitdrawalViewSet, base_name='witdraw')
 router.register(r'trending', TrendingViewSet, base_name='trending')
+router.register(r'ads', AdViewSet, base_name='ads')
 router.register(r'site-settings', SiteSettingsViewSet, base_name='site-settings')
 from django.views.generic import TemplateView
 from django.views.static import serve
