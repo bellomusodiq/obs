@@ -27,13 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-#email activation
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'djangopro1212@gmail.com'
-EMAIL_HOST_PASSWORD = 'Awesomedjango1'
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'DJANGO PRO <hello@ticketsales.com>'
 # Application definition
 
 INSTALLED_APPS = [
@@ -93,19 +86,14 @@ WSGI_APPLICATION = 'ologytalks.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-    # for postgresql use bellow and remove or comment out above
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'd3rdm2hsjlmpck',
-    #     'USER': 'zirrmiegygmpey',
-    #     'PASSWORD': '377788e1a9ffae345dd7f91f71cb8d42fe72cff2ca045b6645511d4c63008fa3',
-    #     'HOST': 'ec2-54-235-165-114.compute-1.amazonaws.com',
-    #     'PORT': '5432',
-    # }
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': 'obs',
+         'USER': 'obs',
+         'PASSWORD': 'adminome123',
+         'HOST': 'localhost',
+         'PORT': '',
+     }
 }
 
 
