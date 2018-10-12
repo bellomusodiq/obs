@@ -25,7 +25,7 @@ SECRET_KEY = '6(=+(mbi1hebr%bdb3h6!lc^!v663pe)r+w)377wn1wrv(6xs='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://178.62.242.29']
 
 # Application definition
 
@@ -144,7 +144,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, 'media_cdn'))
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build', 'static'),
 ]
