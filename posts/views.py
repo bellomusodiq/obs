@@ -26,7 +26,7 @@ class PostViewSet(ModelViewSet):
             queryset = queryset.filter(category__title=category)
         location = self.request.GET.get('location')
         if(location):
-            queryset = queryset.filter(location__title=location)
+            queryset = queryset.filter(location__location=location)
         q = self.request.GET.get('q')
         if q:
             queryset = queryset.filter(title__icontains=q)
